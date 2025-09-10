@@ -740,4 +740,55 @@ carouselCountdowns.forEach((timer, index) => {
     initializeCountdown(timer, hours, 0, 0);
 });
 
+// Auth Modal Logic
+        const authModalOverlay = document.querySelector('.auth-modal-overlay');
+        const allAuthBtns = document.querySelectorAll('.auth_btn');
+        const authModalClose = document.querySelector('.auth-modal-close');
+        const loginForm = document.querySelector('.login-form');
+        const signupForm = document.querySelector('.signup-form');
+        const switchToSignup = document.querySelector('.switch-to-signup');
+        const switchToLogin = document.querySelector('.switch-to-login');
+
+        // Function to open the modal
+        const openModal = () => {
+            authModalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        };
+
+        // Function to close the modal
+        const closeModal = () => {
+            authModalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        };
+
+        // Open modal when any auth button is clicked
+        allAuthBtns.forEach(btn => {
+            btn.addEventListener('click', openModal);
         });
+
+        // Close modal when close button is clicked
+        authModalClose.addEventListener('click', closeModal);
+
+        // Close modal when clicking on the overlay
+        authModalOverlay.addEventListener('click', (e) => {
+            if (e.target === authModalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Switch to Sign Up form
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.classList.remove('active');
+            signupForm.classList.add('active');
+        });
+
+        // Switch to Login form
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupForm.classList.remove('active');
+            loginForm.classList.add('active');
+        });
+
+
+});
